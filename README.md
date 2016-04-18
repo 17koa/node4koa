@@ -3,6 +3,8 @@
 ## 目录
 
 - 一张图看懂Node.js核心
+- 核心变更
+- 推荐技术栈
 - 为什么要选Koa？Koa特性、性能、生态
 - 异步流程控制改进
 - Koa vs Express大比拼
@@ -18,7 +20,9 @@
 - 异步流程控制
 - 模块
 
-## 核心变更：es语法支持
+## 核心变更
+
+**es语法支持**
 
 - 使用Node.js 4.x或5.x里的es6特性，如果想玩更高级的，可以使用[babel](babeljs.com)编译支持es7特性
 - 合理使用[standard](https://github.com/feross/standard) 代码风格约定
