@@ -30,7 +30,11 @@
 - 性能
 - 生态
 
+![Npm](npm.png)
+
 ## 异步流程控制改进（generator && co && async）
+
+![Async](async.png)
 
 ### generator
 
