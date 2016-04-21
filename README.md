@@ -5,20 +5,19 @@
 - 一张图看懂Node.js核心
 - 核心变更
 - 推荐技术栈
-- 为什么要选Koa？Koa特性、性能、生态
+- 为什么要选Koa？
 - 异步流程控制改进
-- Koa vs Express大比拼
 - Koa实践
 - 总结
 
 ## 一张图看懂Node.js核心
 
-![Cover](cover.png)
+![Cover](images/cover.png)
 
 - node4 + es6
 - koa
 - 异步流程控制
-- 模块
+- 生态与模块
 
 ## 核心变更
 
@@ -49,21 +48,145 @@ https://github.com/17koa/koa-generator
 
 ## 为什么要选Koa
 
-- Koa核心
+- 性能优势
+- 异步流程优化
+- 更多语法糖
+
+###  性能
+
+![Benchmark](images/benchmark.png)
+
+```
+➜  koa-benchmark git:(gh-pages) make test -f Makefile2
+npm WARN package.json koa2-benchmark@1.0.0 No README data
+
+> koa2-benchmark@1.0.0 postinstall /Users/sang/workspace/17koa/koa-benchmark/koa2
+> babel koa2-async.js  --out-file koa2-async-compile.js
+
+npm WARN package.json koa-benchmark@1.0.0 No README data
+prepare complete
+benchmark koa-1
+
+  1 middleware
+  5893.92
+
+  5 middleware
+  5902.22
+
+  10 middleware
+  1935.14
+
+  15 middleware
+  5300.84
+
+  20 middleware
+  5137.80
+
+  30 middleware
+  5339.12
+
+  50 middleware
+  5049.62
+
+  100 middleware
+  4578.32
+
+benchmark koa-2
+
+  1 middleware
+  5872.58
+
+  5 middleware
+  5729.20
+
+  10 middleware
+  4860.80
+
+  15 middleware
+  5767.69
+
+  20 middleware
+  5766.93
+
+  30 middleware
+  5446.56
+
+  50 middleware
+  5022.90
+
+  100 middleware
+  5250.70
+
+benchmark koa-2-async
+
+  1 async middleware
+  5815.71
+
+  5 async middleware
+  4639.42
+
+  10 async middleware
+  4423.81
+
+  15 async middleware
+  4261.05
+
+  20 async middleware
+  4217.97
+
+  30 async middleware
+  3620.62
+
+  50 async middleware
+  2478.95
+
+  100 async middleware
+  1745.38
+
+benchmark express
+
+  1 middleware
+  6374.90
+
+  5 middleware
+  6098.11
+
+  10 middleware
+  4436.94
+
+  15 middleware
+  4344.61
+
+  20 middleware
+  5904.50
+
+  30 middleware
+  5945.77
+
+  50 middleware
+  5171.96
+
+  100 middleware
+  4317.21
+```
+
+###  生态与模块
+
+![Npm](images/npm.png)
+
+
+## Koa核心
+
   - Context
   - Middleware
   - Generator
   - Router
   - Views
   - Lifecycle
-- 性能
-- 生态
-
-![Npm](npm.png)
 
 ## 异步流程控制改进（generator && co && async）
 
-![Async](async.png)
+![Async](images/async.png)
 
 ### generator
 
