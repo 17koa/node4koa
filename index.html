@@ -193,9 +193,18 @@
         
 				<section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
           <section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
-					<h2>Part 4：为什么要选Koa？</h2>
-          <br>
-  
+					  <h2>Part 4：为什么要选Koa？</h2>
+            <br>
+					  <p class="fragment">
+              1. 性能
+            </p>
+					  <p class="fragment">
+              2. 异步流程控制
+            </p>
+					  <p class="fragment">
+              3. Koa核心概念
+            </p>
+            
           </section>
           
           <section data-markdown>
@@ -203,7 +212,7 @@
           </section>
           
           <section data-markdown>
-            ## 性能
+            ## 4.1 性能
             
             http://17koa.com/koa-benchmark/
             
@@ -268,7 +277,7 @@
           </section>
           
     		  <section>
-            <h2>异步流程改进</h2>
+            <h2>4.2 异步流程改进</h2>
   					<p class="fragment">
               1. callback
             </p>
@@ -286,12 +295,7 @@
           
           <section data-markdown>
             ## generator/yield + co
-            
-            CI = Continuous integration 持续集成
-            
-            - jenkins
-            - travis-ci
-            
+         
             ```
             教程 https://cnodejs.org/topic/558df089ebf9c92d17e73358
             ```
@@ -302,21 +306,16 @@
           </section>
               
           <section data-markdown>
-            ## 理解测试覆盖率
+            ## async/await
             
-            ci实际上解决了反复测试的自动化问题。
-                  
-            但是如何看我的程序里的每一个函数都测试到了呢？
-            
+          
             
           </section>
               
           <section data-markdown>
-          安装
+          # 4.3 Koa核心概念
         
-          ```
-          $ npm install -g istanbul
-          ```
+          - Middleware
         
           执行
 
@@ -326,48 +325,25 @@
           </section>
             
           <section data-markdown>
-          ## 测试报告
+          ## Middleware
             
-            
-            ```
-            ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly
-                #MongooseDao()
-                  ✓ should return ok when record create
-                  ✓ should return ok when record delete fixture-user
-                  ...
-                  ✓ should return ok when record query
-
-
-              8 passing (50ms)
-
-            =============================== Coverage summary ===============================
-            Statements   : 47.27% ( 26/55 )
-            Branches     : 8.33% ( 1/12 )
-            Functions    : 60% ( 9/15 )
-            Lines        : 47.27% ( 26/55 )
-            ================================================================================
-            ```
+          ![](images/1.JPG)
           </section>
           
           <section data-markdown>
-            - 理解基于gulp自动化测试方法
+          ![](images/2.png)
+          </section>
+          
+          <section data-markdown>
+          ![](images/3.png)
+          </section>
+          
+          <section data-markdown>
+            ## Context
             
             ```
             var gulp = require('gulp');
-            var watch = require('gulp-watch');
-            var path = 'test/**/*.js';
-
-            gulp.task('watch', function() {
-              gulp.watch(['test/**/*.js', 'lib/*.js'], ['mocha']);
-            });
-
-            var mocha = require('gulp-mocha');
-            gulp.task('mocha', function () {
-                return gulp.src(path , {read: false})
-                    .pipe(mocha({reporter: 'spec'}));
-            });
-
-            gulp.task('default',['mocha', 'watch']);
+            
             ```
             
           </section>
@@ -375,7 +351,7 @@
        
           
           <section data-markdown>
-            ## more
+            ## Lifecycle
             
  如果有兴趣，可以去了解更多bdd/tdd内容，甚至是cucumber.js,从用户故事开始写测试
           </section>
