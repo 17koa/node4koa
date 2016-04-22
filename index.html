@@ -294,35 +294,229 @@
   			  </section>
           
           <section data-markdown>
-            ## generator/yield + co
+            ## ES 6里的Generator
          
-            ```
-            教程 https://cnodejs.org/topic/558df089ebf9c92d17e73358
-            ```
+            Generators are a way of returning an arbitrary sequence of results from a function, with the function’s execution suspended in between results.
             
-            ![](images/ci.png)
+           
+            - 参考协程，在 ES6 实现的
+            - 交出函数的执行权（即暂停执行）
+            
+          </section>
+          
+          <section data-markdown>
+            ## Generator野史
+           
+            - JS 版本的 Generator 最早是由 Brendan Eich 实现，他借鉴了 Python Generator的实现，该实现的灵感来自 Icon
+            - 早在 2006 年的 Firefox 2.0 就吸纳了 Generator。但标准化的道路是坎坷的，一路下来，其语法和行为都发生了很多改变
+            - Firefox 和 Chrome 中的 ES6 Generator 是由 Andy Wingo 实现 ，这项工作是由 Bloomberg 赞助的
             
             
           </section>
+          
+          
+          
+          <section data-markdown>
+            ## yield
+         
+            ```
+            I will not yield a step.
+            我寸步不让。
+            ```
+          </section>
+          
+          
+          <section data-markdown>
+            ## 不调用next()，甭想执行
+            
+            ```
+            function* gen(x){
+              var y = yield x + 2;
+              return y;
+            }
+
+            var g = gen(1);
+            g.next() // { value: 3, done: false }
+            g.next(2) // { value: 2, done: true }
+            ```
+          </section>
+        
+          
+          <section data-markdown>
+            ## co
+            
+            Generator based control flow goodness for nodejs and the browser, using promises, letting you write non-blocking code in a nice-ish way.
+         
+            ```
+            co(function* () {
+              var result = yield Promise.resolve(true);
+              return result;
+            }).then(function (value) {
+              console.log(value);
+            }, function (err) {
+              console.error(err.stack);
+            });
+            ```
+            
+            - next在哪里？
+            - 竟然还可以promise？
+            
+          </section>
+          
+          
+          <section data-markdown>
+            ## generator相关小结
+            
+            - generator 协程在 ES6 的实现
+            - yield 让步
+            - next执行
+            - co = 执行 + promise
+            
+          </section>
+          
+          
               
           <section data-markdown>
             ## async/await
             
+            ```
+            function _asyncToGenerator(fn) { 
+              return function () { 
+                var gen = fn.apply(this, arguments); 
+                return new Promise(function (resolve, reject) { 
+                  function step(key, arg) { 
+                    try { 
+                      var info = gen[key](arg); var value = info.value; 
+                    } catch (error) { reject(error); return; } 
+                    if (info.done) { 
+                      resolve(value); 
+                    } else { 
+            ```
+            ```
+                      return Promise.resolve(value)
+                      .then(function (value) {
+                         return step("next", value); 
+                      }, function (err) { 
+                        return step("throw", err); }); 
+                      } 
+                    } 
+                    
+                    return step("next"); 
+                  }); 
+                }; 
+              }
+            ```
+          </section>
           
+          <section data-markdown>
+            ## 看看编译后
+            
+            ```
+            app.use(async (ctx, next) => {
+              await next();
+              ctx.body = body;
+            });
+            ```
+            
+            翻译后
+            
+            ```
+            app.use((() => {
+              var ref = _asyncToGenerator(function* (ctx, next) {
+                yield next();
+                ctx.body = body;
+              });
+
+              return function (_x3, _x4) {
+                return ref.apply(this, arguments);
+              };
+            })());
+            ```
             
           </section>
+          
               
           <section data-markdown>
           # 4.3 Koa核心概念
         
-          - Middleware
+          - 什么是Middleware？
         
-          执行
-
+          </section>
+          
+          <section data-markdown>
+          # Express vs Koa 1
+        
+          Express
+          
           ```
-          $ istanbul cover my-test-script.js -- my test args
+          function middleware(req, res, next) {
+            ...
+            
+            next()
+          }
+          ```
+          
+          koa 1
+          
+          ```
+          middleware = function *(next){
+            ...
+            yield next
+            ...
+            this.xxx
+          }
           ```
           </section>
+          
+          <section data-markdown>
+            ## koa 2 中间件 Common function
+            
+            ```
+            app.use((ctx, next) => {
+              const start = new Date();
+              return next().then(() => {
+                const ms = new Date() - start;
+                console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+              });
+            });
+            ```
+            
+          </section>
+          
+          
+          <section data-markdown>
+            ## koa 2 中间件 async functions (Babel required)
+            
+            ```
+            app.use(async (ctx, next) => {
+              const start = new Date();
+              await next();
+              const ms = new Date() - start;
+              console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+            });
+            ```
+            
+          </section>
+          
+          
+          
+          <section data-markdown>
+            ## koa 2 中间件 GeneratorFunction
+            
+            ```
+            app.use(co.wrap(function *(ctx, next) {
+              const start = new Date();
+              yield next();
+              const ms = new Date() - start;
+              console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+            }));
+            ```
+            
+          </section>
+          
+          
+          
+          
             
           <section data-markdown>
           ## Middleware
@@ -338,12 +532,24 @@
           ![](images/3.png)
           </section>
           
+          
+         
+          
           <section data-markdown>
             ## Context
             
             ```
-            var gulp = require('gulp');
+            let m = async (ctx, next) => {
+              ...
+            }
+            ```
             
+            等于
+            
+            ```
+            var m = async function (ctx, next) {
+              ...
+            }
             ```
             
           </section>
