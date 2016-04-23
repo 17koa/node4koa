@@ -301,6 +301,7 @@
            
             - 参考协程，在 ES6 实现的
             - 交出函数的执行权（即暂停执行）
+            - 外在形式：`function *(){}`
             
           </section>
           
@@ -311,10 +312,7 @@
             - 早在 2006 年的 Firefox 2.0 就吸纳了 Generator。但标准化的道路是坎坷的，一路下来，其语法和行为都发生了很多改变
             - Firefox 和 Chrome 中的 ES6 Generator 是由 Andy Wingo 实现 ，这项工作是由 Bloomberg 赞助的
             
-            
           </section>
-          
-          
           
           <section data-markdown>
             ## yield
@@ -341,6 +339,33 @@
             ```
           </section>
         
+          <section data-markdown>
+          ## 实例
+          
+          ```
+          let getTweets = function* () {
+            let totalTweets = [];
+            let data;
+          ```
+          ```
+            // pause. On `iterator.next()` get the 1st tweet and carry on.
+            data = yield get('https://api.myjson.com/bins/2qjdn');
+            totalTweets.push(data);
+
+            // pause. On `iterator.next()` get the 2nd tweet and carry on.
+            data = yield get('https://api.myjson.com/bins/3zjqz');
+            totalTweets.push(data);
+
+            // pause. On `iterator.next()` get the 3rd tweet and carry on.
+            data = yield get('https://api.myjson.com/bins/29e3f');
+            totalTweets.push(data);
+          ```
+          ```
+            // log the tweets
+            console.log(totalTweets);
+          };
+          ```
+          </section>
           
           <section data-markdown>
             ## co
@@ -371,13 +396,30 @@
             - yield 让步
             - next执行
             - co = 执行 + promise
-            
+             
           </section>
           
-          
-              
           <section data-markdown>
             ## async/await
+            
+            - 语义上更好
+            - 内置执行器
+            - 通用性
+            
+            
+            ```
+            app.use(async (ctx, next) => {
+              const start = new Date();
+              await next();
+              const ms = new Date() - start;
+              console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+            });
+            ```
+          </section>
+          <section data-markdown>
+            ## async/await
+            
+            它就一个语法糖
             
             ```
             function _asyncToGenerator(fn) { 
@@ -483,7 +525,6 @@
             
           </section>
           
-          
           <section data-markdown>
             ## koa 2 中间件 async functions (Babel required)
             
@@ -494,11 +535,8 @@
               const ms = new Date() - start;
               console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
             });
-            ```
-            
+            ```  
           </section>
-          
-          
           
           <section data-markdown>
             ## koa 2 中间件 GeneratorFunction
@@ -513,11 +551,7 @@
             ```
             
           </section>
-          
-          
-          
-          
-            
+
           <section data-markdown>
           ## Middleware
             
@@ -526,15 +560,26 @@
           
           <section data-markdown>
           ![](images/2.png)
+          
+          app.js里堆叠的那些。。。
+          
           </section>
           
           <section data-markdown>
           ![](images/3.png)
+          
+          ```
+          router.get('/', $middlewares.check_api_token, $.api.list);
+          ```
           </section>
-          
-          
+          <section data-markdown>
+           ## Context
          
-          
+           - req/res
+           - this
+           - ctx
+           
+          </section>
           <section data-markdown>
             ## Context
             
@@ -554,12 +599,21 @@
             
           </section>
           
-       
-          
           <section data-markdown>
             ## Lifecycle
+    
+            - config.pre
+            - settings
+              - config.before_settings
+              - config.after_settings
+            - global_middlewares
+              - config.before_global_middlewares
+              - config.after_global_middlewares
+            - routes
+              - config.before_routes
+              - config.after_routes
+            - config.post
             
- 如果有兴趣，可以去了解更多bdd/tdd内容，甚至是cucumber.js,从用户故事开始写测试
           </section>
        
 				</section>
@@ -567,7 +621,7 @@
         
 				<section data-transition="slide" data-background="#01bf9d" data-background-transition="zoom">
           <section data-transition="slide" data-background="#01bf9d" data-background-transition="zoom">
-  					<h2>Part 5：调试</h2>
+  					<h2>Part 5：生态与模块</h2>
  
   					<img src='images/debug.jpg'/>
             
