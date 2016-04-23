@@ -77,10 +77,9 @@
             ## 主要内容
             
             1. 一张图看懂Node.js 4
-            1. 核心变更
             1. 推荐技术栈
+            1. 核心变更
             1. 为什么要选Koa？
-            1. 异步流程控制改进
             1. Koa实践
             
           </section>
@@ -100,51 +99,9 @@
       </section>
         
         
-        
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-        
-  				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-  					<h2>Part 2：核心变更</h2>
-            <p>1）Node SDK里的ES 6 语法支持</p>
-            <p>2）Koa</p>
-            <p>3）异步流程控制</p>
-          </section>
-          
-          <section data-markdown>
-           ## 2.1 ES 6 语法支持
-           
-           - ECMAScript 2015 (ES6) in Node.js https://nodejs.org/en/docs/es6/
-           - 使用Node.js 4.x或5.x里的es6特性，高级可用[babel](babeljs.com)
-           - 合理使用[standard](https://github.com/feross/standard) 代码风格约定
-           - 需要大家重视OO（面向对象）写法的学习和使用
-           
-          </section>
-          
-          <section data-markdown>
-            ## Koa
-            
-            - express
-            - koa 1 
-            - koa 2
-          </section>
-          
-          <section data-markdown>
-            ## 异步流程控制
-            
-            
-          </section>
-          <section data-markdown>
-            ## 模块生态
-            
-  
-          </section>
-        
-  
-				</section>        
-        
 				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
   				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
-  					<h2>Part 3：技术栈推荐</h2>
+  					<h2>Part 2：技术栈推荐</h2>
   					<p>
               http://nodeonly.com/stack/
   					</p>
@@ -190,6 +147,48 @@
           
           
 				</section>
+        
+        
+				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+        
+  				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+  					<h2>Part 3：核心变更</h2>
+            <p>1）Node SDK里的ES 6 语法支持</p>
+            <p>2）Koa</p>
+            <p>3）异步流程控制</p>
+          </section>
+          
+          <section data-markdown>
+           ## 2.1 ES 6 语法支持
+           
+           - ECMAScript 2015 (ES6) in Node.js https://nodejs.org/en/docs/es6/
+           - 使用Node.js 4.x或5.x里的es6特性，高级可用[babel](babeljs.com)
+           - 合理使用[standard](https://github.com/feross/standard) 代码风格约定
+           - 需要大家重视OO（面向对象）写法的学习和使用
+           
+          </section>
+          
+          <section data-markdown>
+            ## Koa
+            
+            - express
+            - koa 1 
+            - koa 2
+          </section>
+          
+          <section data-markdown>
+            ## 异步流程控制
+            
+            
+          </section>
+          <section data-markdown>
+            ## 模块生态
+            
+  
+          </section>
+        
+  
+				</section>        
         
 				<section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
           <section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
@@ -623,141 +622,215 @@
           <section data-transition="slide" data-background="#01bf9d" data-background-transition="zoom">
   					<h2>Part 5：生态与模块</h2>
  
-  					<img src='images/debug.jpg'/>
+  					<img src='images/npm2.png' width='800px' height='600px'/>
             
           </section>
          <section data-markdown>
-            ## 3种方法
+            ## Node.js能干什么？
 
-            - node debugger
-            - node inspector
-            - 测试驱动开发
+            - 网站（如express/koa等）
+            - im即时聊天(socket.io)
+            - api（移动端，pc，h5）
+            - http proxy（淘宝首页）
+            - 前端构建工具(grunt/gulp/bower/webpack/fis3...)
+            - 写操作系统（NodeOS）
+            - 跨平台打包工具（nw.js,electron）
+            - 命令行工具（比如cordova）
+            - 编辑器（atom，vscode）
+
+            https://github.com/sindresorhus/awesome-nodejs
+
+            
          </section>
   
           <section data-markdown>
-             ## node debugger -1
+             ## VSCode debug
     
-             V8 提供了一个强大的调试器，可以通过 TCP 协议从外部访问。
-             
-             Nodejs提供了一个内建调试器来帮助开发者调试应用程序。
-             
-             ```
-             var hello = 'hello';
-             var world = 'nodejs';
-
-             debugger;
-
-             var hello_world = hello + ' ' + world;
-             console.log(hello_world);
-             ```
+             ![](images/vscode-debug.gif)
               
           </section>
           <section data-markdown>
-             ## node debugger -2
+             ## AVA: Futuristic test runner
  
-             执行命令：
-             
-             ```
-             node debug helloword-debug.js 
-             ```
-             
-             就可以进入调试模式。
+             ![](images/ava.png)
           </section>
           
           <section data-markdown>
-             ## 全是命令行能习惯么？
+            ## ava 代码
              
-             ```
-             node-debug-tutorial git:(master) ✗ node debug helloword-debug.js
-             < debugger listening on port 5858
-             connecting... ok
-             break in helloword-debug.js:1
-               1 var hello = 'hello';
-               2 var world = 'nodejs';
-               3 
-             debug> help
-             Commands: run (r), cont (c), next (n), step (s), out (o), backtrace (bt), setBreakpoint (sb), clearBreakpoint (cb),
-             watch, unwatch, watchers, repl, restart, kill, list, scripts, breakOnException, breakpoints, version
-             debug> 
-             debug> n
-             break in helloword-debug.js:2
-               1 var hello = 'hello';
-               2 var world = 'nodejs';
-               3 
-               4 debugger;
-             debug> repl
-             Press Ctrl + C to leave debug repl
-             > hello
-             'hello'
-             ```
-             
-             官方文档
-             
-             ```
-             http://nodejs.org/api/debugger.html
-             ```
+            ```
+            import test from 'ava';
+
+            test('foo', t => {
+                t.pass();
+            });
+
+            test('bar', async t => {
+                const bar = Promise.resolve('bar');
+
+                t.is(await bar, 'bar');
+            });
+            ```
+            
+            - 主要是针对es 6、7最新语法的支持
+            - 更简洁，抄了不少其他测试库的优点
+          </section>
+          
+          
+          
+          <section data-markdown>
+           ## npm
+
+           ![](images/npm.png)
           </section>
           
           <section data-markdown>
-             - node inspector
-             
-             ```
-             https://github.com/node-inspector/node-inspector
-             ```
-          </section>
-          
-          <section data-markdown>       
-安装
-
-```
-npm install -g node-inspector
-```
-
-安装完成之后，通常可以直接这样启动在后台：
-
-```
-node-inspector &
-```
-
-我更喜欢这样用
-
-```
-node-debug app.js
-```
-          </section>
-          
-          
-          
-          <section >
-  					<h2>可视化界面</h2>
-  					<p>
-                <img src='images/inspector-ui.png'/>
-  					</p>
-             
-          </section>
-          
-          <section data-markdown>
-           ## 断点操作
-
-           - resume script execution（F8） 挂起断点，也可以理解为放弃当前断点，如果有下一个断点，会自动断住得
-           - step over（F10） 跳过这行，到下一行，如果当前函数结束，会跳到调用栈的上一级的下一行
-           - step into（F11） 进入当前行代码里的函数内部
-           - step out（Shift + F11） 从当前函数退出到之前进入的代码处
-                        
-             
-          </section>
-          
-          <section data-markdown>
-           ## 总结
-
-           - inspector 足够简单了，功能够用，需要断点的时候用
-           - tdd/bdd 平常做业务测试
+           ## 举例：性能测试
            
-           - 如果想了解更详细的，可以看我写的教程和视频：node-debug 三法三例
            ```
-           https://cnodejs.org/topic/5463f6e872f405c829029f7e
+           wrk -t8 -c1000 -d2  http://127.0.0.1:3333 > wrk.log
+           ```
+           
+           结果
+           
+           ```
+           Running 2s test @ http://127.0.0.1:3333
+             8 threads and 1000 connections
+             Thread Stats   Avg   Stdev(标准偏差)     Max   +/- Stdev( 正负一个标准差占比)
+               Latency   135.20ms   40.84ms 389.59ms   93.44%
+               Req/Sec   683.58    294.98     1.24k    62.99%
+             10712 requests in 2.10s, 1.54MB read
+             Socket errors: connect 0, read 202, write 14, timeout 0
+           Requests/sec:   5108.43
+           Transfer/sec:    753.29KB
+           ```
+           
+           - Latency: 可以理解为响应时间
+           - Req/Sec: 每个线程每秒钟的完成的请求数
+           
+          </section>
+          
+          
+          <section data-markdown>
+           ## 可视化
+
+           - 做测试单次不具有比较意义
+           - 单一框架也不具有比较意义
+           
+           然后呢？
+           
+          </section>
+          
+          
+          <section data-markdown>
+           ## 举例：性能测试
+
+           1）提取文本
+           
+           ```
+           Running 2s test @ http://127.0.0.1:3333
+           ```
+           
+           正则js里的match
+           
+           ```
+           /Running\s(\d+)s\s+test\s+\@\s+http:\/\/([\w\W]+):([\d+]+)\n?/
+           ```
+           
+           - result[1] =  2s
+           - result[2] =  127.0.0.1
+           - result[3] =  3333
+          </section>
+          
+          
+          <section data-markdown>
+           ## 举例：性能测试
+
+           2）wrkparser
+           
+           Install
+
+           ```
+           npm i -S wrkparser
+           ```
+
+           Usages
+
+           ```
+           var obj = require('wrkparser')('wrk.log', 'wrk.log.json')
+           ```
+           
+          </section>
+          
+          <section data-markdown>
+           ## 举例：性能测试
+
+           3）合并多次测试结果你(wrk_scan)
+           
+           - 遍历所有*.log日志文件
+           - 使用wrkparser生成wrk.log.json
+           - 合并多个log.json为wrk.json
+           
+           ```
+           var files = require('fs').readdirSync(path)
+           // console.log(files)
+           var result = {}
+  
+           files.forEach(function(file){
+             if (/\.log$/.test(file)) {
+               console.log(file)
+               result[file.replace('.log', '')] = require('wrkparser')(file)
+             }
+           })
            ```
           </section>
+          
+          <section data-markdown>
+           ## 举例：性能测试
+
+           4）可视化 
+           
+           - ajax读取wrk.json
+           - 生成图表（支持排序等）
+
+           ![Benchmark](images/benchmark.png)
+           
+          </section>
+          
+          <section data-markdown>
+           ## 举例：性能测试
+
+           5）cli支持 
+           
+           package.json里加入
+           
+           ```
+           "preferGlobal": "true",
+           "bin": {
+             "wrk_scan": "bin/wrk_scan.js"
+           },
+           ```
+           
+           扫描当前目录下的日志，合并生产wrk.json
+           
+           ```
+           $ npm i -g wrk_scan
+           $ wrk_scan
+           ```
+           
+          </section>
+          
+          <section data-markdown>
+           ## 举例：性能测试
+           
+           6）TODO
+           
+           - html图表自动生成
+           - 更多选项（比如支持nvd3）
+           
+           http://17koa.com/koa-benchmark/
+          </section>
+          
           
           
 				</section>
@@ -767,16 +840,32 @@ node-debug app.js
            <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" data-markdown>
           ## 回顾一下
    
-          - 了解http协议，尤其是express如何req
-          - 了解db相关操作，以mongoose为主
-          - 了解Promise/A+规范，合理规避回调陷阱
-          - 使用tdd/bdd测试，最小化问题
-          - 你无论如何都要会的：调试
+          1. 一张图看懂Node.js 4
+          1. 核心变更
+          1. 推荐技术栈
+          1. 为什么要选Koa？
+          1. 生态与模块
+          
           </section>
+          
+           <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" data-markdown>
+          ## Koa实践
+   
+          1. HTTP（req和res相关，form && ajax、文件上传）
+          1. Session
+          1. API
+          1. Pub/Sub
+          1. MQ
+          1. Database、Cache
+          1. Scaffold
+          1. 部署
+          
+          </section>
+  
           <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" >
           <h2>招聘Nodejs工程师, 我亲自带</h2>
           目标全栈
-           <p class="fragment">天津，管吃住，工资和北京持平，有机会拿到天津户口，股票期权</p>
+           <p class="fragment">天津</p>
            </section>
         </section>
         
