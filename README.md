@@ -8,7 +8,6 @@
 - 为什么要选Koa？
 - 异步流程控制改进
 - Koa实践
-- 总结
 
 ## 一张图看懂Node.js核心
 
@@ -187,20 +186,3 @@ benchmark express
 ## 异步流程控制改进（generator && co && async）
 
 ![Async](images/async.png)
-
-### generator
-
-### co
-
-### async
-
-### promise
-
-
-## Koa vs Express大比拼
-
-
-## Koa实践
-
-
-## 总结
