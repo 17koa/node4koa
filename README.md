@@ -186,3 +186,18 @@ benchmark express
 ## 异步流程控制改进（generator && co && async）
 
 ![Async](images/async.png)
+
+
+## 在线版本
+
+http://17koa.com/node4koa/
+
+
+
+全文完
+
+欢迎关注我的公众号【node全栈】
+
+![node全栈.png](//dn-cnode.qbox.me/FtALxsauUkYDGdzcuA5y6BaIdUMC)
+
+
